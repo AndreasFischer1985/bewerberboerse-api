@@ -1,0 +1,169 @@
+openapi: "3.0.0"
+info:
+  title: "Arbeitsagentur Bewerberbörse API"
+  description: |
+
+   Eine der größten Datenbanken für Bewerbende in Deutschland durchsuchen. 
+   
+   Die Authentifizierung funktioniert per OAuth 2 Client Credentials mit JWTs. Folgende Client-Credentials können dafür verwendet werden:
+   
+   **ClientID:** 919b0af7-6e5f-4542-a7f5-04268b8bae2e
+   
+   **ClientSecret:** 93fce94c-5be2-4dc8-b040-c62818a4b003
+   
+   **Achtung**: der generierte Token muss bei folgenden GET-requests an https://rest.arbeitsagentur.de/jobboerse/bewerbersuche-service/pc/v1/bewerber im header als 'OAuthAccessToken' inkludiert werden.
+  version: "1.0.0"
+  contact:
+    name:  "AndreasFischer1985"
+    email: "andreasfischer1985@web.de"
+    url: "https://github.com/AndreasFischer1985/bewerberboerse-api"
+
+servers:
+  - url: "https://rest.arbeitsagentur.de/jobboerse/bewerbersuche-service"
+
+paths:
+  /pc/v1/bewerber:
+    get:
+      summary: Bewerberbörse
+      description: "Die Bewerberbörse ermöglicht es, Bewerber*innen mit verschiedenen GET-Parametern zu filtern. "
+      operationId: bewerberboerse
+      responses:
+        '200':
+            description: OK
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Response'
+      parameters:
+        - in: query
+          name: was
+          schema:
+            type: string
+          description: Beruf, Kenntnisse, Sprachen, etc. 
+          example: "Wissenschaftlicher Mitarbeiter"
+          required: false
+
+        - in: query
+          name: ausbildungsart
+          schema:
+            type: string
+            enum:
+                - au
+                - dsa
+                - dsp
+          description: Ausbildungsart - au=Ausbildung, dsa=Duales Studium (ausbildungsintegrierend), dsp=Duales Studium (praxisintegrieren).
+          example: "au"
+          required: false
+
+        - in: query
+          name: wo
+          schema:
+            type: string
+          description: Ort, PLZ, Bundesland, Land, etc.
+          example: "Feucht"
+          required: false
+
+        - in: query
+          name: umkreis
+          schema:
+            type: integer
+            enum:
+                - 0
+                - 10
+                - 15
+                - 20
+                - 50
+                - 100
+                - 200
+          description: Umkreis - 0=ganzer Ort; 10=10km; 15=15km; 20=20km; 50=50km; 100=100km; 200=200km.
+          example: 0
+          required: false
+
+        - in: query
+          name: angebotsart
+          schema:
+            type: string
+            enum:
+                - ar
+                - au
+                - pt
+                - se
+          description: Angebotsart - ar=Arbeitskräfte; au=Auszubildende/Duales Studium; pt=Praktikanten/Trainees; se=Selbstständige.
+          example: "ar"
+          required: false
+
+        - in: query
+          name: arbeitszeit
+          schema:
+            type: string
+            enum:
+                - vz
+                - tz
+                - snw
+          description: Arbeitszeit - vz=Vollzeit; tz=Teilzeit; snw=Schicht,Nacht,Wochenende; ht=Heim-/Telearbeit; mj=Minijob.
+          example: "vz"
+          required: false
+
+        - in: query
+          name: berufserfahrung
+          schema:
+            type: string
+            enum:
+                - be
+                - mb
+          description: Berufserfahrung - be=Berufseinsteiger*innen; mb=Mit Berufserfahrung.
+          example: "mb"
+          required: false
+
+        - in: query
+          name: vertragsart
+          schema:
+            type: string
+            enum:
+                - be
+                - ub
+          description: Vertragsart - be=Befristet; ub=Unbefristet.
+          example: "ub"
+          required: false
+
+        - in: query
+          name: behinderung
+          schema:
+            type: string
+            enum:
+                - an
+          description: Behinderung - an=Nur Schwerbehinderte oder ihnen gleichgestellte Bewerber*innen anzeigen.
+          example: "an"
+          required: false
+
+        - in: query
+          name: page
+          schema:
+            type: integer
+          description: Ergebnissseite
+          example: 0
+          required: false
+
+        - in: query
+          name: size
+          schema:
+            type: integer
+          example: 25
+          description: Anzahl von Ergebnissen
+          required: false
+
+components: 
+  securitySchemes:
+    clientCredAuth:    # <---- arbitrary name
+      type: oauth2
+      description: "Die Authentifizierung funktioniert per OAuth-2-Client Credentials mit JWTs. Client Credentials sind folgende:<br><br> **ClientID:**  919b0af7-6e5f-4542-a7f5-04268b8bae2e <br> **ClientSecret:** 93fce94c-5be2-4dc8-b040-c62818a4b003<br><br>Der generierte Token muss bei folgenden GET-requests an https://rest.arbeitsagentur.de/jobboerse/bewerbersuche-service/pc/v1/bewerber im header als 'OAuthAccessToken' inkludiert werden."
+      flows:
+        clientCredentials:  
+          tokenUrl: https://rest.arbeitsagentur.de/oauth/gettoken_cc
+          scopes: {}
+  schemas:    
+    Response:
+      type: object
+externalDocs:
+  description: "Weiterführende Dokumentation"
+  url: "https://github.com/AndreasFischer1985/bewerberboerse-api"
