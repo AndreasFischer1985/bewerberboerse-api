@@ -1,7 +1,7 @@
 #----------------
 # Simple Example
 #----------------
-install.packages(c("devtools","rjson","httr"))
+install.packages(c("devtools","jsonlite","httr"))
 devtools::install_github("AndreasFischer1985/qqBaseX")
 clientId="919b0af7-6e5f-4542-a7f5-04268b8bae2e"
 clientSecret="93fce94c-5be2-4dc8-b040-c62818a4b003"
@@ -12,10 +12,11 @@ token_request=httr::POST(
         body=postData,encode="form",
         config=httr::config(connecttimeout=60))
 token=httr::content(token_request, as='parsed')$access_token
-url="https://rest.arbeitsagentur.de/jobboerse/bewerbersuche-service/pc/v1/bewerber?angebotsart=ar&wo=Feucht&umkreis=0&page=0&size=25"
+url="https://rest.arbeitsagentur.de/jobboerse/bewerbersuche-service/pc/v1/bewerber?angebotsart=ar"
 data_request=httr::GET(url=url, httr::add_headers(.headers=c("OAuthAccessToken"=token)),
         config=httr::config(connecttimeout=60))
 data_request
 data=httr::content(data_request)
 
+writeLines(jsonlite::toJSON(data$facetten,pretty=TRUE,auto_unbox=TRUE),paste0(Sys.Date(),"_bewerbersuche_facetten.json"))
 
