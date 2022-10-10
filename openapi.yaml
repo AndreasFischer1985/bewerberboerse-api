@@ -51,7 +51,7 @@ paths:
                 - au
                 - dsa
                 - dsp
-          description: Ausbildungsart - au=Ausbildung, dsa=Duales Studium (ausbildungsintegrierend), dsp=Duales Studium (praxisintegrieren).
+          description: Ausbildungsart - au=Ausbildung, dsa=Duales Studium (ausbildungsintegrierend), dsp=Duales Studium (praxisintegrierend).
           example: "au"
           required: false
 
