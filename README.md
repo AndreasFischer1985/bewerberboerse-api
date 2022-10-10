@@ -41,7 +41,7 @@ Beruf, Kenntnisse, Sprachen, etc.
 - dsa
 - dsp
 
-Ausbildungsart: au=Ausbildung, dsa=Duales Studium (ausbildungsintegrierend), dsp=Duales Studium (praxisintegrieren).
+Ausbildungsart: au=Ausbildung, dsa=Duales Studium (ausbildungsintegrierend), dsp=Duales Studium (praxisintegrierend).
 
 
 **Parameter:** *wo* (Optional)
