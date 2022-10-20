@@ -123,4 +123,8 @@ bewerbende=$(curl -m 60 \
 'https://rest.arbeitsagentur.de/jobboerse/bewerbersuche-service/pc/v1/bewerber?angebotsart=ar&wo=Feucht&umkreis=0&page=0&size=25')
 ```
 
+## Bewerbendendetails
 
+**URL:** https://rest.arbeitsagentur.de/jobboerse/bewerbersuche-service/pc/v1/bewerberdetails/{Referenznummer}
+
+Details zu einzelnen Bewerbenden lassen sich unter Angabe der Referenznummer (z.B. 10005-955011998040991647-B) abfragen
