@@ -128,8 +128,8 @@ bewerbende=$(curl -m 60 \
 
 **URL:** https://rest.arbeitsagentur.de/jobboerse/bewerbersuche-service/pc/v1/bewerberdetails/{Referenznummer}
 
-Details zu einzelnen Bewerbenden lassen sich unter Angabe der Referenznummer (z.B. 10005-955011998040991647-B) abfragen
-
+Details zu einzelnen Bewerbenden lassen sich unter Angabe der Referenznummer (z.B. 10005-955011998040991647-B) abfragen,
+u.a. Bildungshistorie, beruflicher Werdegang, Lizenzen, Kenntnisse & Skills.
 
 ### Beispiel:
 
