@@ -22,6 +22,7 @@ servers:
   - url: "https://rest.arbeitsagentur.de/jobboerse/bewerbersuche-service"
 
 paths:
+                  
   /pc/v1/bewerber:
     get:
       summary: Bewerberbörse
@@ -152,6 +153,26 @@ paths:
           description: Anzahl von Ergebnissen
           required: false
 
+  /pc/v1/bewerberdetails/{referenznummer}:
+    get:
+      description: Details zu einzelnen Bewerbenden lassen sich unter Angabe der Referenznummer (z.B. 10005-955011998040991647-B) abfragen
+      operationId: bewerberdetails
+      responses:
+        '200':
+            description: OK
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/Response'
+      parameters:
+        - in: path
+          name: referenznummer
+          schema:
+            type: string
+          description: Referenznummer
+          example: "10005-955011998040991647-B"
+          required: true
+          
 components: 
   securitySchemes:
     clientCredAuth:    # <---- arbitrary name
