@@ -11,7 +11,7 @@ info:
    
    **ClientSecret:** 93fce94c-5be2-4dc8-b040-c62818a4b003
    
-   **Achtung**: der generierte Token muss bei folgenden GET-requests an https://rest.arbeitsagentur.de/jobboerse/bewerbersuche-service/pc/v1/bewerber im header als 'OAuthAccessToken' inkludiert werden.
+   **Achtung**: der generierte Token muss bei folgenden GET-requests im header als *'OAuthAccessToken'* inkludiert werden. Alternativ kann man bei folgenden GET-requests auch direkt die *client_id* als Header-Parameter *'X-API-Key'* übergeben - *'OAuthAccessToken'* ist in diesem Fall nicht erforderlich. 🚀
   version: "1.0.0"
   contact:
     name:  "AndreasFischer1985"
@@ -173,15 +173,18 @@ paths:
           example: "10005-955011998040991647-B"
           required: true
           
-components: 
+
+security:
+  - APIKeyHeaders: []
+
+components:
   securitySchemes:
-    clientCredAuth:    # <---- arbitrary name
-      type: oauth2
-      description: "Die Authentifizierung funktioniert per OAuth-2-Client Credentials mit JWTs. Client Credentials sind folgende:<br><br> **ClientID:**  919b0af7-6e5f-4542-a7f5-04268b8bae2e <br> **ClientSecret:** 93fce94c-5be2-4dc8-b040-c62818a4b003<br><br>Der generierte Token muss bei folgenden GET-requests an https://rest.arbeitsagentur.de/jobboerse/bewerbersuche-service/pc/v1/bewerber im header als 'OAuthAccessToken' inkludiert werden."
-      flows:
-        clientCredentials:  
-          tokenUrl: https://rest.arbeitsagentur.de/oauth/gettoken_cc
-          scopes: {}
+    APIKeyHeaders:    
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: "X-API-Key ist die Client-ID 919b0af7-6e5f-4542-a7f5-04268b8bae2e"
+  
   schemas:    
     Response:
       type: object
