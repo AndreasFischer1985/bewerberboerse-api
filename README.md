@@ -93,12 +93,12 @@ Behinderung: an=Nur Schwerbehinderte oder ihnen gleichgestellte Bewerber*innen a
 
 **Parameter:** *page* (Optional)
 
-Seite (beginnend bei 0).
+Seite (beginnend bei 1).
 
 
 **Parameter:** *size* (Optional)
 
-Anzahl der Ergebnisse
+Anzahl der Ergebnisse per page (bis zu 1000).
 
 
 ### Beispiel:
